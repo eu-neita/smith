@@ -1,11 +1,10 @@
 import { Request, Response } from 'express';
-import ProductModel from '../models/product.model';
-import { Product, CreateProduct } from '../../types/Product';
+import productService from '../service/product.service';
 
-async function create(req: Request, res: Response): Promise<Product> {
+async function create(req: Request, res: Response): Promise<Response> {
   const { name, price, orderId } = req.body;
-  const createOrder = await ProductModel.create({ name, price, orderId });
-  res.status(201).json(transaction);
+  const result = await productService.createProduct({ name, price, orderId });
+  return res.status(result.status).json(result.data);
 }
 
 export default {
