@@ -7,10 +7,6 @@ async function createProduct(
 ): Promise<OrderServiceResponse<ProductSequelizeModel>> {
   const response = await ProductModel.create(products);
 
-  if (!response) {
-    return { status: 400, data: { message: 'Error creating product' } };
-  }
-
   return { status: 201, data: response };
 }
 
