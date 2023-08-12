@@ -1,5 +1,5 @@
 import express from 'express';
-import productController from './database/controller/product.controller';
+import productController from './controller/product.controller';
 
 const app = express();
 

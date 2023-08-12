@@ -14,7 +14,7 @@
     "pretest": "npx -y tsc",
     "test": "jest -i --runInBand --forceExit --verbose --testTimeout=60000",
     "test:local": "mocha",
-    "test:coverage": "nyc mocha",
+    "test:coverage": "nyc mocha --all",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "db:reset": "npx -y tsc && npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all"
   },
