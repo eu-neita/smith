@@ -11,7 +11,7 @@ async function createProduct(
     return { status: 400, data: { message: 'Error creating product' } };
   }
 
-  return { status: 200, data: response };
+  return { status: 201, data: response };
 }
 
 export default {

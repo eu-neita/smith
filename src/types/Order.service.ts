@@ -6,7 +6,7 @@ export type OrderResponseFail = {
 };
 
 export type OrderResponseSuccessfull<T> = {
-  status: 200;
+  status: 201;
   data: T
 };
 
