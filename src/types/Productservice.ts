@@ -10,4 +10,10 @@ export type ProductResponseSuccessfull<T> = {
   data: T
 };
 
-export type ProductServiceResponse<T> = ProductResponseSuccessfull<T> | ProductResponseFail;
+export type ProductResponseSuccessfullGet<T> = {
+  status: 200;
+  data: T
+};
+
+export type ProductServiceResponse<T> = ProductResponseSuccessfull<T> 
+| ProductResponseFail | ProductResponseSuccessfullGet<T>;
