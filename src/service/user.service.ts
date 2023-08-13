@@ -1,13 +1,30 @@
-import { Request, Response } from 'express';
-import userController from '../Controller/user.controller';
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcryptjs';
+import UserModel from '../database/models/user.model';
 
-async function login(req: Request, res: Response): Promise<Response> {
-  const { username, password } = req.body;
-  if (!username || !password) {
-    return res.status(400).json({ message: '"username" and "password" are required' });
+import { UserLogin } from '../types/User';
+import { UserServiceResponse } from '../types/Userservice';
+
+const secret = process.env.JWT_SECRET as string;
+async function loginVerificate(credentials: UserLogin): Promise<UserServiceResponse<object>> {
+  const response = await UserModel.findOne({ where: { username: credentials.username } });
+  console.log(response);
+  
+  if (response === null || !bcrypt
+    .compareSync(credentials.password, response?.dataValues.password as string)) {
+    return { status: 401, data: { message: 'Username or password invalid' } };
   }
-  const result = await userController.loginVerificate({ username, password });
-  return res.status(result.status).json(result.data);
+  const token = jwt.sign(
+    { id: response.dataValues.id, username: credentials.username },
+    secret,
+    {
+      algorithm: 'HS256',
+      expiresIn: 86400,
+    },
+  );
+  return { status: 200, data: { token } };
 }
 
-export default { login };
+export default { 
+  loginVerificate,
+};
