@@ -2,12 +2,13 @@ import express from 'express';
 import productService from './Service/product.service';
 import orderService from './Service/order.service';
 import userService from './Service/user.service';
+import productMiddleware from './Service/product.middleware';
 
 const app = express();
 
 app.use(express.json());
 
-app.post('/products', productService.createProduct);
+app.post('/products', productMiddleware.productVerification, productService.createProduct);
 
 app.get('/products', productService.getProducts);
 
