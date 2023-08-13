@@ -2,7 +2,7 @@ import express from 'express';
 import productService from './Service/product.service';
 import orderService from './Service/order.service';
 import userService from './Service/user.service';
-import productMiddleware from './Service/product.middleware';
+import productMiddleware from './product.middleware';
 
 const app = express();
 
