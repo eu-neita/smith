@@ -11,15 +11,15 @@ chai.use(chaiHttp);
 describe('POST /products', function () { 
   beforeEach(function () { sinon.restore(); });
   it('should return 201', async function () {
-    const xablau = ProductModel.build();
-    sinon.stub(ProductModel, 'create').resolves(xablau);
+    const modelBuild = ProductModel.build();
+    sinon.stub(ProductModel, 'create').resolves(modelBuild);
     const response = await chai.request(app).post('/products').send(noErrors);
      
     expect(response.status).to.be.equal(201);
   });
   it('should return 400', async function () {
-    const xablau = ProductModel.build();
-    sinon.stub(ProductModel, 'create').resolves(xablau);
+    const modelBuild = ProductModel.build();
+    sinon.stub(ProductModel, 'create').resolves(modelBuild);
     const response = await chai.request(app).post('/products').send(missingFilds);
      
     expect(response.status).to.be.equal(400);
