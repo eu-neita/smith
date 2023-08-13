@@ -8,7 +8,6 @@ import { UserServiceResponse } from '../types/Userservice';
 const secret = process.env.JWT_SECRET as string;
 async function loginVerificate(credentials: UserLogin): Promise<UserServiceResponse<object>> {
   const response = await UserModel.findOne({ where: { username: credentials.username } });
-  console.log(response);
   
   if (response === null || !bcrypt
     .compareSync(credentials.password, response?.dataValues.password as string)) {
