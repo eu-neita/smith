@@ -9,8 +9,8 @@ chai.use(chaiHttp);
 describe('GET /orders', function () { 
   beforeEach(function () { sinon.restore(); });
   it('should return 200', async function () {
-    const xablau = OrderModel.build();
-    sinon.stub(OrderModel, 'create').resolves(xablau);
+    const orderBuild = OrderModel.build();
+    sinon.stub(OrderModel, 'create').resolves(orderBuild);
     const response = await chai.request(app).get('/orders').send();
      
     expect(response.status).to.be.equal(200);
